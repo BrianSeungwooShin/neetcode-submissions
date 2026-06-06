@@ -1,29 +1,25 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        vector<int> result;
-        int index1 = 0;
-        int index2 = numbers.size()-1;
+        int l = 0;
+        int r = numbers.size() - 1;
 
-        while (index1 < index2){
-            int currSum = numbers[index1] + numbers[index2];
-            if(target < currSum){
-                index2--;
-            }
-            if (target > currSum){
-                index1++;
-            }
-            if(target == currSum){
-                result.push_back(index1+1);
-                result.push_back(index2+1);
-                return result;
+        while (l < r) {
+            int currentSum = numbers[l] + numbers[r];
+
+            if (currentSum == target) {
+                // Return 1-indexed indices
+                return {l + 1, r + 1};
+            } 
+            else if (currentSum < target) {
+                // We need a larger sum, move the left pointer right
+                l++;
+            } 
+            else {
+                // We need a smaller sum, move the right pointer left
+                r--;
             }
         }
-
-
-        }
-
-
-        
-    
+        return {-1, -1}; // No solution found
+    }
 };
